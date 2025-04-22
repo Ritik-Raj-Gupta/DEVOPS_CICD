@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying application...'
-                    sh 'docker compose -f $COMPOSE_FILE up -d'
+                    sh 'docker-compose up -d'
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up containers...'
-            sh 'docker compose -f $COMPOSE_FILE down || true'
+            sh 'docker-compose down || true'
         }
 
         success {
