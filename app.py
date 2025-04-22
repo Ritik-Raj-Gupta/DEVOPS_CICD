@@ -95,7 +95,7 @@ def course_recommender(course_list):
 
 
 # sql connector
-connection = pymysql.connect(host='mysql',user='root',password='root',db='cv',port=3306)
+connection = pymysql.connect(host='mysql',user='root',password='root',db='cv')
 cursor = connection.cursor()
 
 
