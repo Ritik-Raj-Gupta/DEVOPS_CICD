@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Set the path for your docker-compose.yml file
+        // Path to docker compose file
         COMPOSE_FILE = 'docker-compose.yml'
     }
 
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Checkout the code from GitHub
+                    // Clone repository
                     checkout scm
                 }
             }
@@ -19,8 +19,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Build Docker images using docker-compose
-                    sh 'docker-compose -f docker-compose.yml build'
+                    echo 'Building Docker images...'
+                    sh 'docker compose -f $COMPOSE_FILE build'
                 }
             }
         }
@@ -28,9 +28,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy the app to your server or cloud
-                    // Here you might push to Docker Hub or deploy to a remote server
-                    sh 'docker-compose -f $COMPOSE_FILE up -d'
+                    echo 'Deploying application...'
+                    sh 'docker compose -f $COMPOSE_FILE up -d'
                 }
             }
         }
@@ -38,16 +37,16 @@ pipeline {
 
     post {
         always {
-            // Clean up: Make sure to stop containers and remove any unused volumes
-            sh 'docker-compose -f $COMPOSE_FILE down'
+            echo 'Cleaning up containers...'
+            sh 'docker compose -f $COMPOSE_FILE down || true'
         }
 
         success {
-            echo 'Pipeline succeeded!'
+            echo '✅ Pipeline succeeded!'
         }
 
         failure {
-            echo 'Pipeline failed!'
+            echo '❌ Pipeline failed!'
         }
     }
 }
