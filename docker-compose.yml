@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   mysql:
     image: mysql:5.7
@@ -13,7 +12,6 @@ services:
       - app_network
     volumes:
       - mysql_data:/var/lib/mysql  
-
   streamlit:
     build: .
     container_name: streamlit_app
@@ -30,10 +28,8 @@ services:
     depends_on:
       - mysql
     entrypoint: ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
-
 networks:
   app_network:
     driver: bridge
-
 volumes:
-  - ./mysql_data:/var/lib/mysql
+  mysql_data:
