@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker images...'
-                    sh 'docker-compose up'
+                    sh 'docker-compose build'
                 }
             }
         }
