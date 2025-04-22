@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install spacy
+RUN python -m spacy download en_core_web_sm
 
 # Copy app files
 COPY . .
