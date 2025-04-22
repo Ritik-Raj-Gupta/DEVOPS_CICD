@@ -29,10 +29,11 @@ services:
       - app_network
     depends_on:
       - mysql
+    entrypoint: ["./wait-for-it.sh", "mysql:3306", "--", "streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
 
 networks:
   app_network:
     driver: bridge
 
 volumes:
-  mysql_data:  
+  mysql_data: 
