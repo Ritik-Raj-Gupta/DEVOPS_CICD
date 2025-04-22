@@ -3,13 +3,15 @@ services:
     image: mysql:8.0
     container_name: mysql_db
     environment:
-      MYSQL_ROOT_PASSWORD: Pushp@m009
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: cv
     ports:
       - "3308:3306"
     networks:
       - app_network
-
+    volumes:
+      - mysql_data:/var/lib/mysql
+  
   streamlit:
     build: .
     container_name: streamlit_app
@@ -17,7 +19,7 @@ services:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306  # use container's internal port
       MYSQL_USER: root
-      MYSQL_PASSWORD: Pushp@m009
+      MYSQL_PASSWORD: root
       MYSQL_DB: cv
     ports:
       - "8503:8501"
@@ -29,3 +31,5 @@ services:
 networks:
   app_network:
     driver: bridge
+volumes:
+  mysql_data:
