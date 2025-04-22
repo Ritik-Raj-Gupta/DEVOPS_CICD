@@ -34,19 +34,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            echo 'Cleaning up containers...'
-            sh 'docker-compose down || true'
-        }
-
-        success {
-            echo '✅ Pipeline succeeded!'
-        }
-
-        failure {
-            echo '❌ Pipeline failed!'
-        }
-    }
 }
