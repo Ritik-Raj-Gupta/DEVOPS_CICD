@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   mysql:
     image: mysql:8.0
@@ -9,13 +11,15 @@ services:
       - "3306:3306"
     networks:
       - app_network
-  
+    volumes:
+      - mysql_data:/var/lib/mysql  
+
   streamlit:
     build: .
     container_name: streamlit_app
     environment:
       MYSQL_HOST: mysql
-      MYSQL_PORT: 3306  # use container's internal port
+      MYSQL_PORT: 3306
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DB: cv
@@ -29,3 +33,6 @@ services:
 networks:
   app_network:
     driver: bridge
+
+volumes:
+  mysql_data:  
