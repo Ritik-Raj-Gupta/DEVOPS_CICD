@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     container_name: mysql_db
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -29,7 +29,7 @@ services:
       - app_network
     depends_on:
       - mysql
-    entrypoint: ["./wait-for-it.sh", "mysql:3306", "--", "streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
+    entrypoint: ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
 
 networks:
   app_network:
