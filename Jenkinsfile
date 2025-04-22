@@ -26,12 +26,15 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                script {
-                    echo 'Deploying application...'
-                    sh 'docker-compose up -d'
-                }
-            }
+    steps {
+        script {
+            echo 'Stopping any existing containers...'
+            sh 'docker-compose down -v --remove-orphans || true'
+            
+            echo 'Deploying application...'
+            sh 'docker-compose up -d'
         }
+    }
+}
     }
 }
