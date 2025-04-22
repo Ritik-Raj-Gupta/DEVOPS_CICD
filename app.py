@@ -95,7 +95,7 @@ def course_recommender(course_list):
 
 
 # sql connector
-connection = pymysql.connect(host='localhost',user='root',password='Pushp@m009',db='cv')
+connection = pymysql.connect(host='localhost',user='root',password='root',db='cv')
 cursor = connection.cursor()
 
 
@@ -139,7 +139,7 @@ def run():
     st.sidebar.markdown("# Choose Something...")
     activities = ["User", "Feedback", "About", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Pushpam Kumar</a></b>' 
+    link = '<b>Built with 🤍 by <a style="text-decoration: none; color: #000000;">Ritik Gupta</a></b>' 
     st.sidebar.markdown(link, unsafe_allow_html=True)
     st.sidebar.markdown('''
         <!-- site visitors -->
