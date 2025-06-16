@@ -49,7 +49,7 @@ pipeline {
         }
         stage('SmokeTest') {
     steps {
-        sh 'curl -f http://localhost:8501 && echo "Success" || echo "Failure"'
+        sh 'sleep 10 && curl -f http://localhost:8501 || exit 1'
     }
 }
     }
